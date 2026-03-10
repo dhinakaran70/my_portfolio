@@ -22,6 +22,11 @@
   body {
     @apply bg-navy text-slate font-sans overflow-x-hidden antialiased;
   }
+
+  /* Smooth scroll for story navigation */
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 /* Scrollbar Styles */
@@ -32,14 +37,14 @@
   background: var(--color-navy);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-dark-slate);
+  background: var(--color-lightest-navy);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-light-slate);
 }
 
-/* Numbered Headings Component */
+/* Section Headings */
 @layer components {
   .section-heading {
     @apply flex items-center relative text-[clamp(26px,5vw,32px)] whitespace-nowrap mb-10 text-lightest-slate font-heading font-semibold;
@@ -47,4 +52,97 @@
   .section-heading::after {
     @apply content-[''] block relative top-[-5px] w-[300px] h-[1px] ml-5 bg-lightest-navy;
   }
+}
+
+/* Story connector lines between sections */
+.story-connector {
+  position: relative;
+  width: 2px;
+  height: 80px;
+  margin: 0 auto;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--color-green) 30%,
+    var(--color-green) 70%,
+    transparent
+  );
+  opacity: 0.3;
+}
+
+.story-connector::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-green);
+  box-shadow: 0 0 15px var(--color-green);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+}
+
+/* Story card styling */
+.story-card {
+  background: rgba(17, 34, 64, 0.5);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(35, 53, 84, 0.5);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.story-card:hover {
+  border-color: rgba(100, 255, 218, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(2, 12, 27, 0.5);
+}
+
+/* Skill tag hover effect */
+.skill-tag {
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.skill-tag:hover {
+  background: rgba(100, 255, 218, 0.1);
+  color: var(--color-green);
+}
+
+/* Project card glow effect */
+.project-card {
+  position: relative;
+}
+
+.project-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(100, 255, 218, 0.06),
+    transparent 40%
+  );
+  z-index: 0;
+}
+
+.project-card:hover::before {
+  opacity: 1;
 }
