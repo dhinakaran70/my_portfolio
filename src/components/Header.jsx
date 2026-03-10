@@ -13,26 +13,34 @@ const Header = () => {
     }, []);
 
     const navLinks = [
-        { name: "About", to: "about" },
-        { name: "Experience", to: "experience" },
-        { name: "Projects", to: "projects" },
-        { name: "Contact", to: "contact" },
+        { name: "Origin", to: "about", chapter: "Ch.1" },
+        { name: "Journey", to: "experience", chapter: "Ch.2" },
+        { name: "Creations", to: "projects", chapter: "Ch.3" },
+        { name: "Connect", to: "contact", chapter: "End" },
     ];
 
     return (
         <header
-            className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
-                    ? "h-20 bg-navy/80 backdrop-blur-md shadow-lg"
-                    : "h-24 bg-transparent"
-                }`}
+            className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+                scrolled
+                    ? "h-16 bg-navy/90 backdrop-blur-md shadow-lg"
+                    : "h-20 bg-transparent"
+            }`}
         >
             <nav className="flex justify-between items-center h-full px-6 md:px-12">
                 <div className="text-green font-heading text-2xl font-bold tracking-tighter">
-                    <Link to="hero" smooth={true} duration={500} className="cursor-pointer flex items-center gap-2">
-                        {/* Hexagon Logo */}
+                    <Link
+                        to="hero"
+                        smooth={true}
+                        duration={500}
+                        className="cursor-pointer flex items-center gap-2"
+                    >
                         <div className="relative w-10 h-10 flex items-center justify-center border-2 border-green rounded pt-0.5 group hover:bg-green-tint transition-all">
                             D
                         </div>
+                        <span className="hidden sm:inline text-sm font-mono text-slate font-normal">
+                            story
+                        </span>
                     </Link>
                 </div>
 
@@ -47,8 +55,8 @@ const Header = () => {
                                     offset={-100}
                                     className="cursor-pointer flex items-center text-lightest-slate hover:text-green transition-colors"
                                 >
-                                    <span className="text-green mr-1.5 opacity-70 group-hover:opacity-100">
-                                        0{i + 1}.
+                                    <span className="text-green mr-1.5 opacity-70 group-hover:opacity-100 text-xs">
+                                        {link.chapter}
                                     </span>
                                     {link.name}
                                 </Link>
